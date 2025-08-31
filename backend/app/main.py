@@ -1,12 +1,24 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware  # <-- import CORS
 from app.routers import posts
 
 app = FastAPI(
     title="Real-Time Sentiment Dashboard",
     description="Fetch Reddit and Hacker News posts, preprocess, and analyze sentiment in real-time.",
     version="1.0.0",
+)
+
+# -------------------------------
+# CORS Middleware
+# -------------------------------
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Replace "*" with your frontend URL in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Include routers

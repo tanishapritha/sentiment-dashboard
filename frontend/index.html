@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Sentiment Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.1.2/src/wordcloud2.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">SentimentDash</div>
+    <nav>
+      <span id="api-status">API: <span class="status" id="status-indicator">●</span></span>
+    </nav>
+  </header>
+
+  <main>
+    <section class="controls">
+      <input type="text" id="search-input" placeholder="Search subreddit or query...">
+      <select id="sentiment-filter">
+        <option value="All">All</option>
+        <option value="POSITIVE">Positive</option>
+        <option value="NEGATIVE">Negative</option>
+      </select>
+      <button id="refresh-btn">Refresh</button>
+    </section>
+
+    <section class="posts-grid" id="posts-grid">
+      <!-- Loading skeletons -->
+      <div class="skeleton" ></div>
+      <div class="skeleton" ></div>
+      <div class="skeleton" ></div>
+    </section>
+
+    <section class="wordcloud-panel">
+      <button id="wordcloud-btn">View WordCloud / Trends</button>
+    </section>
+  </main>
+
+  <!-- WordCloud Modal -->
+    <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>WordCloud & Trends</h2>
+    <div id="wordcloud-canvas" style="width:100%; height:300px;"></div>
+    <canvas id="trend-chart" style="width:100%; height:200px; margin-top:20px;"></canvas>
+    </div>
+
+  <footer>
+    <p>&copy; 2025 SentimentDash | Privacy | Terms of Service</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
