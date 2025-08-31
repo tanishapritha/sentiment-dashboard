@@ -1,0 +1,70 @@
+{
+  "info": {
+    "name": "Real-Time Sentiment Dashboard",
+    "_postman_id": "sentiment-dashboard-001",
+    "description": "Postman collection to test the Real-Time Sentiment Dashboard API (Reddit + Hacker News)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Posts",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/posts?subreddit=technology&query=Python&limit=10",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8000",
+          "path": ["api","posts"],
+          "query": [
+            {"key": "subreddit", "value": "technology"},
+            {"key": "query", "value": "Python"},
+            {"key": "limit", "value": "10"}
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Posts - Small Batch",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/posts?subreddit=technology&query=Python&limit=5",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8000",
+          "path": ["api","posts"],
+          "query": [
+            {"key": "subreddit", "value": "technology"},
+            {"key": "query", "value": "Python"},
+            {"key": "limit", "value": "5"}
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Posts - Different Subreddit",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/posts?subreddit=worldnews&query=AI&limit=5",
+          "protocol": "http",
+          "host": ["127","0","0","1"],
+          "port": "8000",
+          "path": ["api","posts"],
+          "query": [
+            {"key": "subreddit", "value": "worldnews"},
+            {"key": "query", "value": "AI"},
+            {"key": "limit", "value": "5"}
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
