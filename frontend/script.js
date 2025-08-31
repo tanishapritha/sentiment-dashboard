@@ -10,6 +10,7 @@ const btn = document.getElementById("wordcloud-btn");
 const span = document.getElementsByClassName("close")[0];
 
 let allPosts = [];
+let trendChartInstance = null; // To reuse chart instance
 
 // Fetch posts from backend
 async function fetchPosts() {
@@ -17,7 +18,7 @@ async function fetchPosts() {
     statusIndicator.style.background = "orange"; // loading
     const res = await fetch("http://127.0.0.1:8000/api/posts");
     const data = await res.json();
-    allPosts = data.posts || [];
+    allPosts = data.data || [];
     renderPosts(allPosts);
     statusIndicator.style.background = "#50E3C2"; // success
   } catch (err) {
@@ -59,8 +60,19 @@ btn.onclick = async () => {
   try {
     const res = await fetch("http://127.0.0.1:8000/api/posts");
     const data = await res.json();
-    generateWordCloud(data.posts);
-    generateTrendChart(data.posts);
+    const posts = data.data || [];
+
+    // Clear previous word cloud
+    document.getElementById('wordcloud-canvas').innerHTML = '';
+
+    // Clear previous trend chart
+    if (trendChartInstance) {
+      trendChartInstance.destroy();
+      trendChartInstance = null;
+    }
+
+    generateWordCloud(posts);
+    generateTrendChart(posts);
   } catch (err) {
     console.error(err);
   }
@@ -70,13 +82,14 @@ window.onclick = (e) => { if(e.target === modal) modal.style.display = "none"; }
 
 // WordCloud
 function generateWordCloud(posts) {
+  const canvas = document.getElementById('wordcloud-canvas');
   const text = posts.map(p => p.cleaned).join(' ');
   const words = text.split(/\s+/).filter(w => w.length > 3);
   const freqMap = {};
   words.forEach(word => freqMap[word] = (freqMap[word] || 0) + 1);
   const wordArray = Object.entries(freqMap);
 
-  WordCloud(document.getElementById('wordcloud-canvas'), {
+  WordCloud(canvas, {
     list: wordArray,
     gridSize: 16,
     weightFactor: 8,
@@ -100,7 +113,7 @@ function generateTrendChart(posts) {
   });
 
   const ctx = document.getElementById('trend-chart').getContext('2d');
-  new Chart(ctx, {
+  trendChartInstance = new Chart(ctx, {
     type: 'line',
     data: {
       labels: hours.map(h => `${h}:00`),

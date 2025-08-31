@@ -40,13 +40,22 @@
     </section>
   </main>
 
-  <!-- WordCloud Modal -->
-    <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>WordCloud & Trends</h2>
-    <div id="wordcloud-canvas" style="width:100%; height:300px;"></div>
-    <canvas id="trend-chart" style="width:100%; height:200px; margin-top:20px;"></canvas>
-    </div>
+ <!-- WordCloud & Trend Modal -->
+<div id="wordcloud-modal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:1000;">
+  <div class="modal-content" style="background:#fff; border-radius:12px; padding:20px; width:90%; max-width:700px; box-shadow:0 8px 20px rgba(0,0,0,0.3); position:relative;">
+    <!-- Close Button -->
+    <span class="close" style="position:absolute; top:12px; right:16px; font-size:24px; cursor:pointer;">&times;</span>
+
+    <h2 style="text-align:center; margin-bottom:20px;">WordCloud & Trends</h2>
+
+    <!-- WordCloud Canvas -->
+    <div id="wordcloud-canvas" style="width:100%; height:300px; border:1px solid #eee; border-radius:8px;"></div>
+
+    <!-- Trend Chart Canvas -->
+    <canvas id="trend-chart" style="width:100%; height:250px; margin-top:30px;"></canvas>
+  </div>
+</div>
+
 
   <footer>
     <p>&copy; 2025 SentimentDash | Privacy | Terms of Service</p>
